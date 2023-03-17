@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Dosis:wght@300&family=Open+Sans:wght@300&display=swap");
+
+body {
+  background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+}
+
+.main-heading {
+  font-family: Caveat;
+  color: rgb(209, 146, 0);
+  font-size: 50px;
+  position: absolute;
+  top: 20%;
+  left: 27%;
+}
+
+.input-main {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+}
+
+.items {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3%;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+}

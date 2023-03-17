@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Dosis:wght@300&family=Open+Sans:wght@300&display=swap");
+
+.home-page {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to right, #2c3e50, #3498db);
+}
+
+.home-heading {
+  font-family: Caveat;
+  color: rgb(246, 179, 23);
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  font-size: 50px;
+}
+
+.btn-home {
+  font-family: Caveat;
+  color: azure;
+  position: absolute;
+  top: 60%;
+  left: 43%;
+  font-size: 25px;
+}
