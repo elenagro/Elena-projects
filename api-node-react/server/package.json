@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Student's app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elenagro/Elena-projects.git"
+  },
+  "author": "Elena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elenagro/Elena-projects/issues"
+  },
+  "homepage": "https://github.com/elenagro/Elena-projects#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21"
+  },
+  "devDependencies": {}
+}

@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Form from "./components/Form";
+import StudentsList from "./components/StudentsList";
 
-function App() {
+function App(props) {
+  const [studentGrades, setStudentGrades] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:8080/studenti");
+        const data = await response.json();
+        setStudentGrades(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const studentsHandler = (event) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: props.name, grade: props.grade }),
+    };
+    fetch("http://localhost:8080/studenti", requestOptions)
+      .then((response) => response.json())
+      .then((data) => setStudentGrades(data));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form onAddStudent={studentsHandler} />
+      <StudentsList students={studentGrades} />
     </div>
   );
 }
