@@ -19,19 +19,19 @@ const create = async (data) => {
 };
 
 const getAll = async () => {
-  return language.find({});
+  return Language.find({});
 };
 
 const getOne = async (id) => {
-  return language.findOne({ _id: id });
+  return Language.findOne({ _id: id });
 };
 
 const updateOne = async (id, data) => {
-  return language.updateOne({ _id: id }, data);
+  return Language.updateOne({ _id: id }, data);
 };
 
 const remove = async (id) => {
-  return language.deleteOne({ _id: id });
+  return Language.deleteOne({ _id: id });
 };
 
 module.exports = {
