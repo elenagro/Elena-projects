@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./style.css";
 
 const CATEGORIES = [
@@ -46,18 +47,12 @@ const initialFacts = [
 ];
 
 const App = () => {
-  const appTitle = "Today I Learned";
+  const [visible, setVisible] = useState(false);
+
   return (
     <>
-      {/* HEADER */}
-      <header className="header">
-        <div className="logo">
-          <img src="logo.png" alt="Today I learned logo" />
-          <h1>{appTitle}</h1>
-        </div>
-        <button className="btn btn-large btn-open">Share a fact</button>
-      </header>
-      <NewFactForm />
+      <Header visible={visible} setVisible={setVisible} />
+      {visible && <NewFactForm />}
       <main className="main">
         <CategoryFilter />
         <FactList />
@@ -66,8 +61,84 @@ const App = () => {
   );
 };
 
+const Header = ({ visible, setVisible }) => {
+  const appTitle = "Today I Learned";
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="logo.png" alt="Today I learned logo" />
+        <h1>{appTitle}</h1>
+      </div>
+      <button
+        className="btn btn-large btn-open"
+        onClick={() => setVisible((show) => !show)}
+      >
+        {visible ? "Close" : "Share a fact"}
+      </button>
+    </header>
+  );
+};
+
+const isValidHttpUrl = (string) => {
+  let url;
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
+};
+
 const NewFactForm = () => {
-  return <form className="fact-form">Fact Form</form>;
+  const [text, setText] = useState("");
+  const [source, setSource] = useState("");
+  const [category, setCategory] = useState("");
+  const textLength = text.length;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // valid data
+    if (text && isValidHttpUrl(source) && category && textLength <= 200) {
+      // object
+      const newFact = {
+        id: Math.random().toString(),
+        text,
+        source,
+        category,
+        votesInteresting: 0,
+        votesMindblowing: 0,
+        votesFalse: 0,
+        createdIn: new Date().getCurrentYear(),
+      };
+    }
+  };
+
+  return (
+    <form className="fact-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Share a fact with the world..."
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <span>{200 - textLength}</span>
+      <input
+        value={source}
+        type="text"
+        placeholder="Trustworthy source..."
+        onChange={(e) => setSource(e.target.value)}
+      />
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="">Choose category:</option>
+        {CATEGORIES.map((cat) => (
+          <option key={cat.name} value={cat.name}>
+            {cat.name.toLocaleUpperCase()}
+          </option>
+        ))}
+      </select>
+      <button className="btn btn-large">Post</button>
+    </form>
+  );
 };
 
 const CategoryFilter = () => {
@@ -78,7 +149,7 @@ const CategoryFilter = () => {
           <button className="btn btn-all-categories">All</button>
         </li>
         {CATEGORIES.map((cat) => (
-          <li className="category">
+          <li key={cat.name} className="category">
             <button
               className="btn btn-category"
               style={{ backgroundColor: cat.color }}
