@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import supabase from "./supabase";
+
 import "./style.css";
 
 const CATEGORIES = [
@@ -48,16 +50,48 @@ const initialFacts = [
 
 const App = () => {
   const [visible, setVisible] = useState(false);
+  const [facts, setFacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getFacts = async () => {
+      setIsLoading(true);
+      const { data: facts, error } = await supabase
+        .from("facts")
+        .select("*")
+        .order("votesInteresting", { ascending: false })
+        .limit(10000);
+      setFacts(facts);
+      console.log(facts);
+      console.log(error);
+      if (!error) setFacts(facts);
+      else alert("There was a problem getting the data...");
+      setIsLoading(false);
+    };
+    getFacts();
+  }, []);
 
   return (
     <>
       <Header visible={visible} setVisible={setVisible} />
-      {visible && <NewFactForm />}
+      {visible && <NewFactForm setFacts={setFacts} setVisible={setVisible} />}
       <main className="main">
         <CategoryFilter />
-        <FactList />
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <FactList facts={facts} setFacts={setFacts} />
+        )}
       </main>
     </>
+  );
+};
+
+const Loader = () => {
+  return (
+    <div className="spinner-container">
+      <div className="loading-spinner"></div>
+    </div>
   );
 };
 
@@ -89,7 +123,7 @@ const isValidHttpUrl = (string) => {
   return url.protocol === "http:" || url.protocol === "https:";
 };
 
-const NewFactForm = () => {
+const NewFactForm = ({ setFacts, setVisible }) => {
   const [text, setText] = useState("");
   const [source, setSource] = useState("");
   const [category, setCategory] = useState("");
@@ -108,8 +142,16 @@ const NewFactForm = () => {
         votesInteresting: 0,
         votesMindblowing: 0,
         votesFalse: 0,
-        createdIn: new Date().getCurrentYear(),
+        createdIn: new Date().getFullYear(),
       };
+      // adding new fact
+      setFacts((prevFacts) => [newFact, ...prevFacts]);
+      // reset input fields
+      setText("");
+      setSource("");
+      setCategory("");
+      // close the form
+      setVisible(false);
     }
   };
 
@@ -163,8 +205,7 @@ const CategoryFilter = () => {
   );
 };
 
-const FactList = () => {
-  const facts = initialFacts;
+const FactList = ({ facts }) => {
   return (
     <section>
       <ul className="facts-list">
