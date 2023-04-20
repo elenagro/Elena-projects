@@ -255,3 +255,9 @@ ul {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
+
+.message {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: inherit;
+}
