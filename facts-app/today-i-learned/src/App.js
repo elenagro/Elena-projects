@@ -200,7 +200,7 @@ const CategoryFilter = ({ setCurrentCategory }) => {
   );
 };
 
-const FactList = ({ facts }) => {
+const FactList = ({ facts, setFacts }) => {
   if (facts.length === 0) {
     return (
       <p className="message">
@@ -212,7 +212,7 @@ const FactList = ({ facts }) => {
     <section>
       <ul className="facts-list">
         {facts.map((fact) => (
-          <Fact fact={fact} key={fact.id} />
+          <Fact fact={fact} key={fact.id} setFacts={setFacts} />
         ))}
       </ul>
       <p>There are {facts.length} facts in the database. Add your own!</p>
@@ -220,9 +220,25 @@ const FactList = ({ facts }) => {
   );
 };
 
-const Fact = ({ fact }) => {
+const Fact = ({ fact, setFacts }) => {
   // const { factObj } = props;
   // const factObj = props.factObj
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const handleVote = async (columnName) => {
+    setIsUpdating(true);
+    const { data: updatedFact, error } = await supabase
+      .from("facts")
+      .update({ [columnName]: fact[columnName] + 1 })
+      .eq("id", fact.id)
+      .select();
+    setIsUpdating(false);
+
+    if (!error)
+      setFacts((facts) =>
+        facts.map((f) => (f.id === fact.id ? updatedFact[0] : f))
+      );
+  };
   return (
     <li className="fact">
       <p>
@@ -246,9 +262,21 @@ const Fact = ({ fact }) => {
         {fact.category}
       </span>
       <div className="vote-buttons">
-        <button>👍 {fact.votesInteresting}</button>
-        <button>🤯 {fact.votesMindblowing}</button>
-        <button>⛔️ {fact.votesFalse}</button>
+        <button
+          onClick={() => handleVote("votesInteresting")}
+          disabled={isUpdating}
+        >
+          👍 {fact.votesInteresting}
+        </button>
+        <button
+          onClick={() => handleVote("votesMindBlowing")}
+          disabled={isUpdating}
+        >
+          🤯 {fact.votesMindBlowing}
+        </button>
+        <button onClick={() => handleVote("votesFalse")} disabled={isUpdating}>
+          ⛔️ {fact.votesFalse}
+        </button>
       </div>
     </li>
   );

@@ -122,6 +122,9 @@ h1 {
 .vote-buttons button:hover {
   background-color: #292524;
 }
+.vote-buttons button:disabled {
+  background-color: #44403c;
+}
 
 .vote-buttons button:active {
   background-color: #292524;
