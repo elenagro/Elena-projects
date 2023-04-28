@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const recipes = require("./handlers/recipes");
 const db = require("./pkg/db");
