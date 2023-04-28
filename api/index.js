@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const languages = require("./handlers/progLangs");
 const db = require("./pkgs/db");
