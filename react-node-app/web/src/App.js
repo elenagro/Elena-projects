@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import LogIn from "./LogIn";
-import Register from "./Register";
+import Header from "./components/Header";
+import LogIn from "./components/LogIn";
+import Register from "./components/Register";
+
 import "./App.css";
 
 const App = () => {
@@ -9,25 +11,9 @@ const App = () => {
   const locationHandler = (e) => {
     setLocation(e.target.dataset.target);
   };
-
   return (
     <div>
-      <nav className="nav">
-        <button
-          className="login-btn"
-          onClick={locationHandler}
-          data-target="login"
-        >
-          Log In
-        </button>
-        <button
-          className="register-btn"
-          onClick={locationHandler}
-          data-target="register"
-        >
-          Register
-        </button>
-      </nav>
+      <Header locationHandler={locationHandler} />
       <div className="form">
         {location === "login" && <LogIn />}
         {location === "register" && <Register />}

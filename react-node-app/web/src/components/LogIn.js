@@ -40,7 +40,7 @@ const LogIn = () => {
 
   return (
     <div className="login-form">
-      <h2>Log In</h2>
+      <h2>SIGN IN</h2>
       <label>
         <span>E-mail</span>
         <input
@@ -59,7 +59,9 @@ const LogIn = () => {
           onChange={inputHandler}
         />
       </label>
-      <button onClick={logInHandler}>Log In</button>
+      <div className="btn-submit">
+        <button onClick={logInHandler}>Sign in</button>
+      </div>
     </div>
   );
 };

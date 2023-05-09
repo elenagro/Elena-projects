@@ -1,0 +1,49 @@
+.login-form {
+  background: linear-gradient(to left, #59c173, #a17fe0, #5d26c1);
+  border-radius: 50px;
+  margin-top: 30px;
+  color: #fff;
+  padding: 20px;
+  border-top: 1px solid #bae6fd;
+  border-right: 1px solid #bae6fd;
+  width: 580px;
+}
+
+h2 {
+  text-align: center;
+}
+
+label {
+  margin-left: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border-radius: 50px;
+  box-sizing: border-box;
+  border: #9ca3af;
+  box-shadow: 1px 3px #9ca3af;
+}
+
+.btn-submit {
+  text-align: center;
+}
+
+.btn-submit button {
+  padding: 10px 25px;
+  margin-top: 8px;
+  color: #4c1d95;
+  background-color: #fff;
+  font-size: 17px;
+  border: #4c1d95;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-submit button:hover {
+  background-color: #bbf7d0;
+}

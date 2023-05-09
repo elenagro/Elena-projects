@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Register.css";
 
 const Register = () => {
   const regData = {
@@ -37,8 +38,8 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className="register-form">
+      <h2>REGISTER</h2>
       <label>
         <span>E-mail</span>
         <input
@@ -75,7 +76,9 @@ const Register = () => {
           onChange={inputHandler}
         />
       </label>
-      <button onClick={registerHandler}>Register</button>
+      <div className="btn-register">
+        <button onClick={registerHandler}>Sign up</button>
+      </div>
     </div>
   );
 };
