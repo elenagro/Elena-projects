@@ -20,26 +20,26 @@ const Register = () => {
   //   The use of square brackets around e.target.name allows us to dynamically compute the key name based on the name attribute of the input element. This is necessary because the name attribute of the input element could be any string, and we want to use it as the key name in the state object.
 
   const registerHandler = async () => {
-    // console.log(data);
-    // try {
-    //   let res = await fetch(`/api/v1/auth/create-account`, {
-    //     method: "post",
-    //     body: JSON.stringify(data),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   if (res.ok) {
-    //     alert("User created!");
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    console.log(data);
+    try {
+      let res = await fetch(`/api/v1/auth/create-account`, {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.ok) {
+        alert("User created!");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className="register-form">
-      <h2>REGISTER</h2>
+      <h2>SIGN UP</h2>
       <label>
         <span>E-mail</span>
         <input

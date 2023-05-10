@@ -19,23 +19,20 @@ const LogIn = () => {
   const logInHandler = async () => {
     console.log(data);
 
-    // try {
-    //     let res = await fetch(
-    //         `/api/v1/auth/login`,
-    //         {
-    //             method: 'post',
-    //             body: JSON.stringify(data),
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         }
-    //     );
-    //     let out = await res.json();
-    //     alert(out.token);
-    //     console.log(out);
-    // } catch(err) {
-    //     console.log(err);
-    // }
+    try {
+      let res = await fetch(`/api/v1/auth/login`, {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let out = await res.json();
+      alert(out.token);
+      console.log(out);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
