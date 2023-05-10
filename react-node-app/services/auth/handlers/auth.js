@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs");
 const user = require("../../../pkg/user");
 const jwt = require("jsonwebtoken");
-const config = require("../../../pkg/config");
+// const config = require("../../../pkg/config");
+require("dotenv").config();
 
 const create = async (req, res) => {
   try {
@@ -49,7 +50,7 @@ const login = async (req, res) => {
       fullName: u.fullName,
     };
 
-    let token = jwt.sign(payload, config.get("security").jwt_secret);
+    let token = jwt.sign(payload, process.env.JWT_SECRET);
 
     return res.status(200).send({ token });
   } catch (err) {

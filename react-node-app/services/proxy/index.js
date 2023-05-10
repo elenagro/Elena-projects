@@ -1,4 +1,5 @@
-const config = require("../../pkg/config");
+// const config = require("../../pkg/config");
+require("dotenv").config();
 const express = require("express");
 const proxy = require("express-http-proxy");
 
@@ -35,7 +36,7 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || config.get("services").proxy.port;
+const PORT = process.env.PORT;
 
 app.listen(PORT, (err) => {
   if (err) {

@@ -1,4 +1,5 @@
-const config = require("../../pkg/config");
+// const config = require("../../pkg/config");
+require("dotenv").config();
 const db = require("../../pkg/db");
 const express = require("express");
 const jwt = require("express-jwt");
@@ -13,7 +14,7 @@ api.use(express.json());
 api.use(
   jwt.expressjwt({
     algorithms: ["HS256"],
-    secret: config.get("security").jwt_secret,
+    secret: process.env.JWT_SECRET,
   })
 );
 
@@ -26,12 +27,9 @@ api.post("/api/v1/posts", posts.create);
 api.put("/api/v1/posts/:id", posts.update);
 api.delete("/api/v1/post/:id", posts.remove);
 
-api.listen(config.get("services").posts.port, (err) => {
+api.listen(process.env.PORT, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log(
-    "Service [posts] successfully started on port",
-    config.get("services").posts.port
-  );
+  console.log("Service [posts] successfully started on port", process.env.PORT);
 });

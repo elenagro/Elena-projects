@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
-const config = require("../config");
+// const config = require("../config");
+require("dotenv").config();
 
 const init = () => {
-  const url = config.get("db").url;
-  const username = config.get("db").username;
-  const password = config.get("db").password;
-  const dbname = config.get("db").dbname;
+  const url = process.env.URL;
+  const username = process.env.USERNAME;
+  const password = process.env.PASSWORD;
+  const dbname = process.env.DB_NAME;
   const dsn = `mongodb+srv://${username}:${password}@${url}/${dbname}?retryWrites=true&w=majority`;
   mongoose.connect(dsn, (err) => {
     if (err) {

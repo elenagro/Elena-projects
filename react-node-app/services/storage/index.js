@@ -1,4 +1,5 @@
-const config = require("../../pkg/config");
+// const config = require("../../pkg/config");
+require("dotenv").config();
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const { expressjwt: jwt } = require("express-jwt");
@@ -9,7 +10,7 @@ const api = express();
 api.use(
   jwt({
     algorithms: ["HS256"],
-    secret: config.get("security").jwt_secret,
+    secret: process.env.JWT_SECRET,
   })
 );
 api.use(fileUpload());
@@ -17,12 +18,12 @@ api.use(fileUpload());
 api.post("/api/v1/storage", storage.upload);
 api.get("/api/v1/storage/:file", storage.download);
 
-api.listen(config.get("services").storage.port, (err) => {
+api.listen(process.env.PORT, (err) => {
   if (err) {
     return console.log(err);
   }
   console.log(
     "Service [storage] successfully started on port",
-    config.get("services").storage.port
+    process.env.PORT
   );
 });
