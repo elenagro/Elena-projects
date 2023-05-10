@@ -1,4 +1,3 @@
-// const config = require("../../pkg/config");
 require("dotenv").config();
 const express = require("express");
 const proxy = require("express-http-proxy");

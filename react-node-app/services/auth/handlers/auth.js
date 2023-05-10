@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const user = require("../../../pkg/user");
 const jwt = require("jsonwebtoken");
-// const config = require("../../../pkg/config");
+
 require("dotenv").config();
 
 const create = async (req, res) => {

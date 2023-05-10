@@ -1,4 +1,3 @@
-// const config = require("../../pkg/config");
 require("dotenv").config();
 const db = require("../../pkg/db");
 const express = require("express");
