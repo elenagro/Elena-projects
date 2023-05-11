@@ -26,9 +26,12 @@ api.post("/api/v1/posts", posts.create);
 api.put("/api/v1/posts/:id", posts.update);
 api.delete("/api/v1/post/:id", posts.remove);
 
-api.listen(process.env.PORT, (err) => {
+api.listen(process.env.POSTS_PORT, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log("Service [posts] successfully started on port", process.env.PORT);
+  console.log(
+    "Service [posts] successfully started on port",
+    process.env.POSTS_PORT
+  );
 });

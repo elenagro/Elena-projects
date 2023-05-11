@@ -17,12 +17,12 @@ api.use(fileUpload());
 api.post("/api/v1/storage", storage.upload);
 api.get("/api/v1/storage/:file", storage.download);
 
-api.listen(process.env.PORT, (err) => {
+api.listen(process.env.STORAGE_PORT, (err) => {
   if (err) {
     return console.log(err);
   }
   console.log(
     "Service [storage] successfully started on port",
-    process.env.PORT
+    process.env.STORAGE_PORT
   );
 });

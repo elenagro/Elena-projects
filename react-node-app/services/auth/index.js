@@ -24,7 +24,7 @@ api.use(
   })
 );
 
-api.post("/api/v1/auth/create-account", auth.create);
+api.post("/api/v1/auth/", auth.create);
 api.post("/api/v1/auth/login", auth.login);
 
 api.post("/api/v1/auth/forgot-password", auth.forgotPassword);
@@ -40,9 +40,12 @@ api.use(function (err, req, res, next) {
   }
 });
 
-api.listen(process.env.PORT, (err) => {
+api.listen(process.env.AUTH_PORT, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log("Service [auth] successfully started on port", process.env.PORT);
+  console.log(
+    "Service [auth] successfully started on port",
+    process.env.AUTH_PORT
+  );
 });

@@ -8,6 +8,7 @@ const LogIn = () => {
   };
 
   const [data, setData] = useState(logInData);
+  const [token, setToken] = useState([]);
 
   const inputHandler = (e) => {
     setData({
@@ -28,7 +29,7 @@ const LogIn = () => {
         },
       });
       let out = await res.json();
-      alert(out.token);
+      setToken(out.token);
       console.log(out);
     } catch (err) {
       console.log(err);
@@ -59,6 +60,7 @@ const LogIn = () => {
       <div className="btn-submit">
         <button onClick={logInHandler}>Sign in</button>
       </div>
+      <span>{token}</span>
     </div>
   );
 };
